@@ -1,0 +1,10 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.acf-field.fontawesomepicker,
+.acf-field.fontawesomepicker input {
+    cursor: pointer;
+}

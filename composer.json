@@ -1,0 +1,25 @@
+{
+    "name": "starring-jane/wordplate-fontawesome-picker",
+    "description": "A package that allows you to pick icons from fontawesome with wordplate",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jef Vermeire",
+            "email": "jef@starringjane.com"
+        },
+        {
+            "name": "Maxim Vanhove",
+            "email": "maxim@starringjane.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "StarringJane\\WordplateFontawesomePicker\\": "src/"
+        }
+    },
+    "require": {
+        "wordplate/acf": "^11.0"
+    }
+}
