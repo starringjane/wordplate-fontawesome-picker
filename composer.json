@@ -20,6 +20,6 @@
         }
     },
     "require": {
-        "wordplate/acf": "^11.0"
+        "wordplate/acf": ">=7.0"
     }
 }
