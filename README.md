@@ -6,11 +6,11 @@ A package that allows you to pick icons from fontawesome with wordplate
 
 ## Installation
 
-```shell
+```sh
 composer require starring-jane/wordplate-fontawesome-picker
 ```
 
-Create a WordpressBlade instance in `functions.php`
+Create a WordplateFontawesomePicker instance in `functions.php`
 
 ```php
 use StarringJane\WordplateFontawesomePicker\WordplateFontawesomePicker;
