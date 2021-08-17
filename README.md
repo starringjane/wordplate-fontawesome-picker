@@ -6,7 +6,9 @@ A package that allows you to pick icons from fontawesome with wordplate
 
 ## Installation
 
-`composer require starring-jane/wordplate-fontawesome-picker`
+```shell
+composer require starring-jane/wordplate-fontawesome-picker
+```
 
 Create a WordpressBlade instance in `functions.php`
 
