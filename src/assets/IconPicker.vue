@@ -39,6 +39,7 @@
                                     id="grid-state"
                                     v-model="selectedOption"
                                     class="sjwfp-block sjwfp-appearance-none sjwfp-w-1/2 sjwfp-bg-grey-lighter sjwfp-border sjwfp-border-grey-lighter sjwfp-text-grey-darker sjwfp-py-3 sjwfp-px-4 sjwfp-pr-8 sjwfp-rounded sjwfp-leading-tight sjwfp-focus:outline-none sjwfp-focus:bg-white sjwfp-focus:border-grey"
+                                    @change="resetIndex()"
                                 >
                                     <option value="1">
                                         All
