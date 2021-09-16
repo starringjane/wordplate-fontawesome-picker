@@ -88,7 +88,7 @@
                                 class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4"
                             >
                                 <button
-                                    class="sjwfp-bg-transparent"
+                                    class="!sjwfp-bg-transparent !sjwfp-border-none"
                                     @click="prevPage"
                                 >
                                     <i
@@ -102,7 +102,7 @@
                                 </p>
 
                                 <button
-                                    class="sjwfp-bg-transparent"
+                                    class="!sjwfp-bg-transparent !sjwfp-border-none"
                                     @click="nextPage"
                                 >
                                     <i
