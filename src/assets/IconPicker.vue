@@ -24,7 +24,7 @@
 
                                 <button
                                     v-if="search"
-                                    class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent"
+                                    class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent !sjwfp-border-none"
                                     @click="resetSearch"
                                 >
                                     <i class="far fa-times-circle" />
@@ -68,7 +68,7 @@
                                     :key="key"
                                 >
                                     <button
-                                        class="sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                        class="sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
                                         @click="setIcon(icon)"
                                     >
                                         <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
@@ -119,7 +119,7 @@
                                     <button
                                         v-for="(icon, key) in recentIcons.slice(0, 10)"
                                         :key="key"
-                                        class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                        class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
                                         @click="setIcon(icon)"
                                     >
                                         <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
@@ -357,7 +357,7 @@ export default {
         },
 
         prevPage () {
-            if (this.selectedPage > 0) {
+            if (this.selectedPage > 1) {
                 this.selectedPage--;
             }
         },
