@@ -20,7 +20,7 @@ class WordplateFontawesomePicker
 
     public function registerHooks()
     {
-        add_action('enqueue_block_editor_assets', [$this, 'enqueAssets']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueAssets']);
     }
 
     public function enqueAssets()
@@ -32,7 +32,7 @@ class WordplateFontawesomePicker
         $picker_script_uri = $this->getAssetUri('icon-picker.js');
 
         wp_enqueue_style('gutenberg-wordplate-fontawesome-picker', $styles_uri, false, $this->version, 'all');
-        wp_enqueue_script('gutenberg-wordplate-fontawesome-picker', $script_uri, ['wp-blocks', 'wp-dom-ready', 'wp-edit-post'], $this->version);
+        wp_enqueue_script('gutenberg-wordplate-fontawesome-picker', $script_uri, [], $this->version);
         wp_localize_script('gutenberg-wordplate-fontawesome-picker', 'WordplateFontawesomePickerLocalized', [
             'picker_script_uri' => $picker_script_uri,
         ]);
@@ -48,6 +48,12 @@ class WordplateFontawesomePicker
 
     public function getAssetUri($filename = '')
     {
-        return wp_upload_dir()['baseurl'] . '/' . $this->name . '/dist/' . $filename;
+        $url = wp_upload_dir()['baseurl'] . '/' . $this->name . '/dist/' . $filename;
+
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+            $url = str_replace('http://', 'https://', $url);
+        }
+
+        return $url;
     }
 }
