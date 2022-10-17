@@ -1,159 +1,194 @@
 /* eslint-disable vue/script-indent */
 <template>
     <div
-        class="sjwfp-fixed sjwfp-z-10 sjwfp-inset-0 sjwfp-overflow-y-auto sjwfp-bg-gray-500 sjwfp-bg-opacity-75 sjwfp-transition-opacity"
+        class="sjwfp-fixed sjwfp-z-10 sjwfp-inset-0 sjwfp-min-h-screen sjwfp-bg-gray-500 sjwfp-bg-opacity-75 sjwfp-transition-opacity sjwfp-box-border"
         aria-labelledby="modal-title"
         role="dialog"
         aria-modal="true"
     >
-        <div class="sjwfp-flex sjwfp-items-center sjwfp-justify-center sjwfp-min-h-screen sjwfp-pt-4 sjwfp-px-4 sjwfp-pb-20 sjwfp-text-center">
-            <div class="sjwfp-inline-block sjwfp-align-bottom sjwfp-bg-white sjwfp-rounded-lg sjwfp-text-left sjwfp-overflow-hidden sjwfp-shadow-xl sjwfp-transform sjwfp-transition-all sm:sjwfp-my-8 sm:sjwfp-align-middle sm:sjwfp-max-w-screen-md sm:sjwfp-w-full">
-                <div class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-5 sjwfp-pb-4 sm:sjwfp-p-6 sm:sjwfp-pb-4">
-                    <div class="sm:sjwfp-flex sm:sjwfp-items-start">
-                        <div class="sjwfp-mt-3 sjwfp-text-center sm:sjwfp-text-left sjwfp-w-full">
-                            <h3 class="sjwfp-mt-0">
-                                Keywords icon:
-                            </h3>
-                            <div class="sjwfp-relative sjwfp-flex sjwfp-items-center">
-                                <i class="far fa-search sjwfp-absolute sjwfp-text-lg sjwfp-left-4 sjwfp-pointer-events-none" />
+        <div class="sjwfp-block sjwfp-h-full sjwfp-py-12 sjwfp-px-4 sjwfp-text-center sjwfp-box-border sjwfp-overflow-y-scroll">
+            <div class="sjwfp-flex sjwfp-items-center sjwfp-justify-center sjwfp-min-h-full sjwfp-text-center sjwfp-box-border">
+                <div class="sjwfp-block sjwfp-align-bottom sjwfp-bg-white sjwfp-rounded-lg sjwfp-text-left sjwfp-overflow-hidden sjwfp-shadow-xl sjwfp-transform sjwfp-transition-all sm:sjwfp-my-8 sm:sjwfp-align-middle sm:sjwfp-max-w-screen-md sm:sjwfp-w-full">
+                    <div class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-5 sjwfp-pb-4 sm:sjwfp-p-6 sm:sjwfp-pb-4">
+                        <div class="sm:sjwfp-flex sm:sjwfp-items-start">
+                            <div class="sjwfp-mt-3 sjwfp-text-center sm:sjwfp-text-left sjwfp-w-full">
+                                <h3 class="sjwfp-mt-0">
+                                    Keywords icon:
+                                </h3>
+                                <div class="sjwfp-relative sjwfp-flex sjwfp-items-center">
+                                    <i class="far fa-search sjwfp-absolute sjwfp-text-lg sjwfp-left-4 sjwfp-pointer-events-none" />
 
-                                <input
-                                    v-model="search"
-                                    class="sjwfp-bg-gray-50 sjwfp-rounded sjwfp-p-3 sjwfp-pl-10 sjwfp-w-full sjwfp-border sjwfp-border-gray-400 focus-within:sjwfp-outline-none"
-                                >
-
-                                <button
-                                    v-if="search"
-                                    class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent !sjwfp-border-none"
-                                    @click="resetSearch"
-                                >
-                                    <i class="far fa-times-circle" />
-                                </button>
-                            </div>
-
-                            <div class="sjwfp-flex sjwfp-items-center sjwfp-my-3">
-                                <p class="sjwfp-w-1/2">
-                                    Select icon category:
-                                </p>
-                                <select
-                                    id="grid-state"
-                                    v-model="selectedOption"
-                                    class="sjwfp-block sjwfp-appearance-none sjwfp-w-1/2 sjwfp-bg-grey-lighter sjwfp-border sjwfp-border-grey-lighter sjwfp-text-grey-darker sjwfp-py-3 sjwfp-px-4 sjwfp-pr-8 sjwfp-rounded sjwfp-leading-tight sjwfp-focus:outline-none sjwfp-focus:bg-white sjwfp-focus:border-grey"
-                                    @change="resetIndex()"
-                                >
-                                    <option value="1">
-                                        All
-                                    </option>
-                                    <option value="fas">
-                                        Solid
-                                    </option>
-                                    <option value="far">
-                                        Regular
-                                    </option>
-                                    <option value="fal">
-                                        Light
-                                    </option>
-                                    <option value="fad">
-                                        Duotone
-                                    </option>
-                                    <option value="fab">
-                                        Brands
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="sjwfp-grid sjwfp-grid-cols-6 md:sjwfp-grid-cols-8 xl:sjwfp-grid-cols-12 sjwfp-mt-2 sjwfp-text-center">
-                                <div
-                                    v-for="(icon, key) in icons.slice(((selectedPage - 1) * iconsPerPage), (selectedPage * iconsPerPage))"
-                                    :key="key"
-                                >
-                                    <button
-                                        class="sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
-                                        @click="setIcon(icon)"
+                                    <input
+                                        v-model="search"
+                                        class="sjwfp-bg-gray-50 sjwfp-rounded sjwfp-p-3 sjwfp-pl-10 sjwfp-w-full sjwfp-border sjwfp-border-solid sjwfp-border-gray-400 focus-within:sjwfp-outline-none"
                                     >
-                                        <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
+
+                                    <button
+                                        v-if="search"
+                                        class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent !sjwfp-border-none"
+                                        @click="resetSearch"
+                                    >
+                                        <i class="far fa-times-circle" />
                                     </button>
                                 </div>
-                            </div>
 
-                            <p
-                                v-if="icons.length === 0"
-                                class="sjwfp-text-orange sjwfp-mt-4"
-                            >
-                                Geen icons gevonden
-                            </p>
+                                <div class="sjwfp-flex sjwfp-items-center sjwfp-my-3">
+                                    <p class="sjwfp-w-1/2">
+                                        Select icon category:
+                                    </p>
+                                    <select
+                                        id="grid-state"
+                                        v-model="selectedOption"
+                                        class="sjwfp-block sjwfp-appearance-none sjwfp-w-1/2 sjwfp-bg-grey-lighter sjwfp-border sjwfp-border-solid sjwfp-border-grey-lighter sjwfp-text-grey-darker sjwfp-py-3 sjwfp-px-4 sjwfp-pr-8 sjwfp-rounded sjwfp-leading-tight sjwfp-focus:outline-none sjwfp-focus:bg-white sjwfp-focus:border-grey"
+                                        @change="resetIndex()"
+                                    >
+                                        <option value="1">
+                                            All
+                                        </option>
+                                        <option value="fas">
+                                            Solid
+                                        </option>
+                                        <option value="far">
+                                            Regular
+                                        </option>
+                                        <option value="fal">
+                                            Light
+                                        </option>
+                                        <option value="fad">
+                                            Duotone
+                                        </option>
+                                        <option value="fab">
+                                            Brands
+                                        </option>
+                                    </select>
+                                </div>
 
-                            <div
-                                v-if="icons.length > iconsPerPage"
-                                class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4"
-                            >
-                                <button
-                                    class="!sjwfp-bg-transparent !sjwfp-border-none"
-                                    @click="prevPage"
+                                <div class="sjwfp-grid sjwfp-grid-cols-6 md:sjwfp-grid-cols-8 xl:sjwfp-grid-cols-12 sjwfp-mt-2 sjwfp-text-center">
+                                    <div
+                                        v-for="(icon, key) in icons.slice(((selectedPage - 1) * iconsPerPage), (selectedPage * iconsPerPage))"
+                                        :key="key"
+                                    >
+                                        <button
+                                            class="sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            @click="setIcon(icon)"
+                                        >
+                                            <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <p
+                                    v-if="icons.length === 0"
+                                    class="sjwfp-text-orange sjwfp-mt-4"
                                 >
-                                    <i
-                                        class="far fa-chevron-left sjwfp-text-2xl"
-                                        :class="selectedPage > 1 ? 'sjwfp-visible' : 'sjwfp-invisible'"
-                                    />
-                                </button>
-
-                                <p class="px-4">
-                                    {{ selectedPage + '/' + parseInt(pages) }}
+                                    Geen icons gevonden
                                 </p>
 
-                                <button
-                                    class="!sjwfp-bg-transparent !sjwfp-border-none"
-                                    @click="nextPage"
+                                <div
+                                    v-if="icons.length > iconsPerPage"
+                                    class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4"
                                 >
-                                    <i
-                                        class="far fa-chevron-right sjwfp-text-2xl"
-                                        :class="selectedPage !== parseInt(pages) ? 'sjwfp-visible' : 'sjwfp-invisible'"
-                                    />
-                                </button>
-                            </div>
-                            <div
-                                v-if="recentIcons.length > 0"
-                            >
-                                <p>Recent icons:</p>
-                                <div class="sjwfp-grid sjwfp-grid-cols-10 sjwfp-w-full sjwfp-mt-2 sjwfp-text-center">
                                     <button
-                                        v-for="(icon, key) in recentIcons.slice(0, 10)"
-                                        :key="key"
-                                        class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
-                                        @click="setIcon(icon)"
+                                        class="!sjwfp-bg-transparent !sjwfp-border-none"
+                                        @click="prevPage"
                                     >
-                                        <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
+                                        <i
+                                            class="far fa-chevron-left sjwfp-text-2xl"
+                                            :class="selectedPage > 1 ? 'sjwfp-visible' : 'sjwfp-invisible'"
+                                        />
                                     </button>
+
+                                    <p class="sjwfp-px-4">
+                                        {{ selectedPage }} &nbsp; / &nbsp; {{ pages }}
+                                    </p>
+
+                                    <button
+                                        class="!sjwfp-bg-transparent !sjwfp-border-none"
+                                        @click="nextPage"
+                                    >
+                                        <i
+                                            class="far fa-chevron-right sjwfp-text-2xl"
+                                            :class="selectedPage !== parseInt(pages) ? 'sjwfp-visible' : 'sjwfp-invisible'"
+                                        />
+                                    </button>
+                                </div>
+                                <div
+                                    v-if="recentIcons.length > 0"
+                                >
+                                    <p>Recent icons:</p>
+                                    <div class="sjwfp-grid sjwfp-grid-cols-10 sjwfp-w-full sjwfp-mt-2 sjwfp-text-center">
+                                        <button
+                                            v-for="(icon, key) in recentIcons.slice(0, 10)"
+                                            :key="key"
+                                            class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            @click="setIcon(icon)"
+                                        >
+                                            <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="sjwfp-bg-white sjwfp-px-4 sjwfp-py-3 sm:sjwfp-px-6 sm:sjwfp-flex">
-                    <button
-                        id="cancelButton"
-                        type="button"
-                        class="sjwfp-mt-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-gray-50 sjwfp-border sjwfp-border-gray-500 sjwfp-text-base sjwfp-font-medium sjwfp-text-gray-700 hover:sjwfp-bg-gray-100 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
-                        @click="cancel"
-                    >
-                        Cancel
-                    </button>
 
-                    <button
-                        v-if="selectedIcon"
-                        type="button"
-                        class="sjwfp-mt-3 sjwfp-items-center sjwfp-w-full sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-bg-primary-500 sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-text-base sjwfp-font-medium sjwfp-text-white hover:sjwfp-bg-blue-500 sm:sjwfp-mt-0 sm:sjwfp-ml-3 sm:sjwfp-text-sm"
-                        @click="useIcon"
-                    >
-                        <span>Use</span>
+                    <div v-if="asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-3 sm:sjwfp-px-6 sm:sjwfp-flex">
+                        <div class="sjwfp-text-sm sjwfp-font-bold">
+                            Are you sure you want to clear the field?
+                        </div>
+                    </div>
 
-                        <i
-                            class="sjwfp-px-2 sjwfp-text-lg"
-                            :class="selectedIcon.prefix + ' ' + selectedIcon.class"
-                        />
+                    <div v-if="asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-py-3 sm:sjwfp-px-6 sm:sjwfp-flex">
+                        <button
+                            type="button"
+                            class="sjwfp-mt-3 sjwfp-mr-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-red-100 sjwfp-border sjwfp-border-solid sjwfp-border-red-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-red-700 hover:sjwfp-bg-red-200 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            @click="confirmClear"
+                        >
+                            Yes, clear the field
+                        </button>
 
-                        <span>as icon</span>
-                    </button>
+                        <button
+                            type="button"
+                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-gray-50 sjwfp-border sjwfp-border-solid sjwfp-border-gray-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-gray-700 hover:sjwfp-bg-gray-100 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            @click="cancelClear"
+                        >
+                            No, keep the icon
+                        </button>
+                    </div>
+
+                    <div v-if="!asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-py-3 sm:sjwfp-px-6 sm:sjwfp-flex">
+                        <button
+                            type="button"
+                            class="sjwfp-mt-3 sjwfp-mr-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-red-100 sjwfp-border sjwfp-border-solid sjwfp-border-red-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-red-700 hover:sjwfp-bg-red-200 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            @click="askForClear"
+                        >
+                            Clear
+                        </button>
+
+                        <button
+                            type="button"
+                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-gray-50 sjwfp-border sjwfp-border-solid sjwfp-border-gray-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-gray-700 hover:sjwfp-bg-gray-100 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            @click="cancel"
+                        >
+                            Close
+                        </button>
+
+                        <button
+                            v-if="selectedIcon"
+                            id="sjwfpUseIconButton"
+                            type="button"
+                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-w-full sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-bg-primary-500 sjwfp-border sjwfp-border-solid sjwfp-border-primary-600 sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-text-base sjwfp-font-medium sjwfp-text-white hover:sjwfp-bg-blue-500 sm:sjwfp-mt-0 sm:sjwfp-ml-3 sm:sjwfp-text-sm"
+                            @click="useIcon"
+                        >
+                            <span>Use</span>
+
+                            <i
+                                class="sjwfp-px-2 sjwfp-text-lg"
+                                :class="selectedIcon.prefix + ' ' + selectedIcon.class"
+                            />
+
+                            <span>as icon</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -180,6 +215,7 @@ export default {
         selectedOption: '1',
         selectedPage: 1,
         recentIcons: [],
+        asksForClear: false,
     }),
 
     computed: {
@@ -283,9 +319,19 @@ export default {
         },
         setIcon (icon) {
             this.selectedIcon = icon;
+            this.cancelClear();
+            this.srollToUseButton();
         },
-        resetSelectedIcon () {
-            this.selectedIcon = null;
+        askForClear () {
+            this.asksForClear = true;
+        },
+        cancelClear () {
+            this.asksForClear = false;
+        },
+        confirmClear () {
+            window.WordplateFontawesomePicker.inputElement.value = '';
+            this.$nextTick(() => { jQuery(window.WordplateFontawesomePicker.inputElement).trigger('change'); });
+            this.close();
         },
         useIcon () {
             window.WordplateFontawesomePicker.inputElement.value = `${this.selectedIcon.prefix} ${this.selectedIcon.class}`;
@@ -300,7 +346,18 @@ export default {
 
             this.close();
         },
+        srollToUseButton() {
+            this.$nextTick(() => {
+                const el = document.getElementById('sjwfpUseIconButton');
 
+                if (el) {
+                    el.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center',
+                    });
+                }
+            });
+        },
         fetchLightIcons () {
             if (this.selectedOption === '1' || this.selectedOption === 'fal') {
                 fetch('/light.json')
