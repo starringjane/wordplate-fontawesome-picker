@@ -4,42 +4,41 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2858356bd0e84e58c5fc1a5e126e1767",
+    "content-hash": "f323abfbe6886dc14225632fc028fb20",
     "packages": [
         {
-            "name": "wordplate/acf",
-            "version": "11.0.1",
+            "name": "vinkla/extended-acf",
+            "version": "13.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/wordplate/extended-acf.git",
-                "reference": "70afa45f4cb5632ee2be657d85d183737db7bdde"
+                "url": "https://github.com/vinkla/extended-acf.git",
+                "reference": "d763d3818bd87c73ad4d62535eccd1176ea4784a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wordplate/extended-acf/zipball/70afa45f4cb5632ee2be657d85d183737db7bdde",
-                "reference": "70afa45f4cb5632ee2be657d85d183737db7bdde",
+                "url": "https://api.github.com/repos/vinkla/extended-acf/zipball/d763d3818bd87c73ad4d62535eccd1176ea4784a",
+                "reference": "d763d3818bd87c73ad4d62535eccd1176ea4784a",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "^3.6"
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "11.1-dev"
+                    "dev-master": "13.3-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "WordPlate\\Acf\\": "src/"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Extended\\ACF\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -49,10 +48,6 @@
                 {
                     "name": "Vincent Klaiber",
                     "email": "hello@doubledip.se"
-                },
-                {
-                    "name": "Chris Andersson",
-                    "email": "hello@puredazzle.se"
                 }
             ],
             "description": "Register advanced custom fields with object oriented PHP",
@@ -60,15 +55,15 @@
                 "acf",
                 "advanced",
                 "custom",
+                "extended",
                 "fields",
-                "wordplate",
                 "wordpress"
             ],
             "support": {
-                "issues": "https://github.com/wordplate/extended-acf/issues",
-                "source": "https://github.com/wordplate/extended-acf/tree/11.0.1"
+                "issues": "https://github.com/vinkla/extended-acf/issues",
+                "source": "https://github.com/vinkla/extended-acf/tree/13.2.1"
             },
-            "time": "2021-05-23T19:28:42+00:00"
+            "time": "2023-02-21T08:50:40+00:00"
         }
     ],
     "packages-dev": [],
@@ -79,5 +74,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }
