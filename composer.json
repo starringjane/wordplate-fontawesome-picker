@@ -20,6 +20,6 @@
         }
     },
     "require": {
-        "wordplate/acf": ">=7.0"
+        "vinkla/extended-acf": ">=7.0"
     }
 }

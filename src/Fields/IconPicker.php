@@ -2,7 +2,7 @@
 
 namespace StarringJane\WordplateFontawesomePicker\Fields;
 
-class IconPicker extends \WordPlate\Acf\Fields\Text
+class IconPicker extends \Extended\ACF\Fields\Text
 {
     public function __construct(string $label, ?string $name = null)
     {
