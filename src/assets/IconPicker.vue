@@ -1,7 +1,7 @@
 /* eslint-disable vue/script-indent */
 <template>
     <div
-        class="sjwfp-fixed sjwfp-z-10 sjwfp-inset-0 sjwfp-min-h-screen sjwfp-bg-gray-500 sjwfp-bg-opacity-75 sjwfp-transition-opacity sjwfp-box-border"
+        class="sjwfp sjwfp-fixed sjwfp-z-10 sjwfp-inset-0 sjwfp-min-h-screen sjwfp-bg-gray-500 sjwfp-bg-opacity-75 sjwfp-transition-opacity sjwfp-box-border"
         aria-labelledby="modal-title"
         role="dialog"
         aria-modal="true"
@@ -12,90 +12,80 @@
                     <div class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-5 sjwfp-pb-4 sm:sjwfp-p-6 sm:sjwfp-pb-4">
                         <div class="sm:sjwfp-flex sm:sjwfp-items-start">
                             <div class="sjwfp-mt-3 sjwfp-text-center sm:sjwfp-text-left sjwfp-w-full">
-                                <h3 class="sjwfp-mt-0">
-                                    Keywords icon:
-                                </h3>
-                                <div class="sjwfp-relative sjwfp-flex sjwfp-items-center">
-                                    <i class="far fa-search sjwfp-absolute sjwfp-text-lg sjwfp-left-4 sjwfp-pointer-events-none" />
+                                <form class="sjwfp-relative sjwfp-flex sjwfp-items-center" @submit.prevent="searchForIcon">
+                                    <button
+                                        class="sjwfp-absolute sjwfp-text-lg sjwfp-left-2 !sjwfp-bg-transparent !sjwfp-border-none"
+                                        type="submit"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"/></svg>
+                                    </button>
 
                                     <input
                                         v-model="search"
                                         class="sjwfp-bg-gray-50 sjwfp-rounded sjwfp-p-3 sjwfp-pl-10 sjwfp-w-full sjwfp-border sjwfp-border-solid sjwfp-border-gray-400 focus-within:sjwfp-outline-none"
+                                        placeholder="Search..."
                                     >
 
                                     <button
                                         v-if="search"
                                         class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent !sjwfp-border-none"
-                                        @click="resetSearch"
+                                        @click="reset"
+                                        type="button"
                                     >
-                                        <i class="far fa-times-circle" />
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM180.7 180.7c-6.2 6.2-6.2 16.4 0 22.6L233.4 256l-52.7 52.7c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L256 278.6l52.7 52.7c6.2 6.2 16.4 6.2 22.6 0s6.2-16.4 0-22.6L278.6 256l52.7-52.7c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.2-22.6 0L256 233.4l-52.7-52.7c-6.2-6.2-16.4-6.2-22.6 0z"/></svg>
                                     </button>
-                                </div>
+                                </form>
 
-                                <div class="sjwfp-flex sjwfp-items-center sjwfp-my-3">
+                                <div v-if="availableStyles" class="sjwfp-flex sjwfp-items-center sjwfp-my-3">
                                     <p class="sjwfp-w-1/2">
                                         Select icon category:
                                     </p>
                                     <select
                                         id="grid-state"
-                                        v-model="selectedOption"
+                                        v-model="selectedStyle"
                                         class="sjwfp-block sjwfp-appearance-none sjwfp-w-1/2 sjwfp-bg-grey-lighter sjwfp-border sjwfp-border-solid sjwfp-border-grey-lighter sjwfp-text-grey-darker sjwfp-py-3 sjwfp-px-4 sjwfp-pr-8 sjwfp-rounded sjwfp-leading-tight sjwfp-focus:outline-none sjwfp-focus:bg-white sjwfp-focus:border-grey"
                                         @change="resetIndex()"
                                     >
-                                        <option value="1">
+                                        <option value="">
                                             All
                                         </option>
-                                        <option value="fas">
-                                            Solid
-                                        </option>
-                                        <option value="far">
-                                            Regular
-                                        </option>
-                                        <option value="fal">
-                                            Light
-                                        </option>
-                                        <option value="fad">
-                                            Duotone
-                                        </option>
-                                        <option value="fab">
-                                            Brands
-                                        </option>
+
+                                        <option
+                                            v-for="style in availableStyles"
+                                            :key="style"
+                                            :value="style"
+                                            v-text="style"
+                                        />
                                     </select>
                                 </div>
 
-                                <div class="sjwfp-grid sjwfp-grid-cols-6 md:sjwfp-grid-cols-8 xl:sjwfp-grid-cols-12 sjwfp-mt-2 sjwfp-text-center">
+                                <div v-if="icons && icons.length" class="sjwfp-grid sjwfp-grid-cols-6 md:sjwfp-grid-cols-8 xl:sjwfp-grid-cols-12 sjwfp-mt-2 sjwfp-text-center">
                                     <div
-                                        v-for="(icon, key) in icons.slice(((selectedPage - 1) * iconsPerPage), (selectedPage * iconsPerPage))"
-                                        :key="key"
+                                        v-for="icon in icons"
+                                        :key="icon.class"
                                     >
                                         <button
-                                            class="sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            class="sjwfp sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            v-html="icon.svg"
                                             @click="setIcon(icon)"
-                                        >
-                                            <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
-                                        </button>
+                                        />
                                     </div>
                                 </div>
 
                                 <p
-                                    v-if="icons.length === 0"
-                                    class="sjwfp-text-orange sjwfp-mt-4"
+                                    v-if="icons !== null && icons.length === 0"
+                                    class="sjwfp-text-red-400 sjwfp-mt-4 sjwfp-mb-8"
                                 >
-                                    Geen icons gevonden
+                                    No icons were found
                                 </p>
 
-                                <div
-                                    v-if="icons.length > iconsPerPage"
-                                    class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4"
-                                >
+                                <div v-if="pages" class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4">
                                     <button
                                         class="!sjwfp-bg-transparent !sjwfp-border-none"
+                                        :class="selectedPage > 1 ? 'sjwfp-visible' : 'sjwfp-invisible'"
                                         @click="prevPage"
                                     >
-                                        <i
-                                            class="far fa-chevron-left sjwfp-text-2xl"
-                                            :class="selectedPage > 1 ? 'sjwfp-visible' : 'sjwfp-invisible'"
-                                        />
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M20.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l192-192c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L54.6 256 235.3 436.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-192-192z"/></svg>
                                     </button>
 
                                     <p class="sjwfp-px-4">
@@ -105,26 +95,24 @@
                                     <button
                                         class="!sjwfp-bg-transparent !sjwfp-border-none"
                                         @click="nextPage"
+                                        :class="selectedPage !== parseInt(pages) ? 'sjwfp-visible' : 'sjwfp-invisible'"
                                     >
-                                        <i
-                                            class="far fa-chevron-right sjwfp-text-2xl"
-                                            :class="selectedPage !== parseInt(pages) ? 'sjwfp-visible' : 'sjwfp-invisible'"
-                                        />
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M299.3 244.7c6.2 6.2 6.2 16.4 0 22.6l-192 192c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L265.4 256 84.7 75.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l192 192z"/></svg>
                                     </button>
                                 </div>
+
                                 <div
                                     v-if="recentIcons.length > 0"
                                 >
                                     <p>Recent icons:</p>
                                     <div class="sjwfp-grid sjwfp-grid-cols-10 sjwfp-w-full sjwfp-mt-2 sjwfp-text-center">
                                         <button
-                                            v-for="(icon, key) in recentIcons.slice(0, 10)"
-                                            :key="key"
+                                            v-for="icon in recentIcons.slice(0, 10)"
+                                            :key="icon.class"
                                             class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
                                             @click="setIcon(icon)"
-                                        >
-                                            <i :class="`${icon.prefix} ${icon.class} fa-fw`" />
-                                        </button>
+                                            v-html="icon.svg"
+                                        />
                                     </div>
                                 </div>
                             </div>
@@ -181,9 +169,9 @@
                         >
                             <span>Use</span>
 
-                            <i
-                                class="sjwfp-px-2 sjwfp-text-lg"
-                                :class="selectedIcon.prefix + ' ' + selectedIcon.class"
+                            <span
+                                class="sjwfp-mx-3 sjwfp-text-lg"
+                                v-html="selectedIcon.svg"
                             />
 
                             <span>as icon</span>
@@ -198,114 +186,62 @@
 <script>
 var $ = window.jQuery;
 
-var icons = {
-    solidIcons: require('./solid.json'),
-    regularIcons: require('./regular.json'),
-    lightIcons: require('./light.json'),
-    duotoneIcons: require('./duotone.json'),
-    brandsIcons: require('./brands.json'),
-};
-
 export default {
     data: () => ({
-        iconsPerPage: 60, // Amount of icons to display.
-        allIcons: true,
+        iconsPerPage: 60,
         search: null,
+        results: null,
         selectedIcon: null,
-        selectedOption: '1',
+        selectedStyle: '',
         selectedPage: 1,
         recentIcons: [],
         asksForClear: false,
     }),
 
     computed: {
-        icons () {
-            const displayIcons = [];
+        availableStyles () {
+            if (window.WordplateFontawesomePickerLocalized && window.WordplateFontawesomePickerLocalized.availableStyles) {
+                return window.WordplateFontawesomePickerLocalized.availableStyles;
+            }
 
-            /**
-             * If seach bar is empty push all icons in display icon array
-             */
-            if (this.search === null) {
-                if (icons.solidIcons && this.selectedOption === 'fas') icons.solidIcons.forEach((icon) => displayIcons.push(icon));
-                if (icons.regularIcons && this.selectedOption === 'far') icons.regularIcons.forEach((icon) => displayIcons.push(icon));
-                if (icons.lightIcons && this.selectedOption === 'fal') icons.lightIcons.forEach((icon) => displayIcons.push(icon));
-                if (icons.duotoneIcons && this.selectedOption === 'fad') icons.duotoneIcons.forEach((icon) => displayIcons.push(icon));
-                if (icons.brandsIcons && this.selectedOption === 'fab') icons.brandsIcons.forEach((icon) => displayIcons.push(icon));
-                // Display all icons
-                if (icons.brandsIcons && icons.solidIcons && icons.duotoneIcons && icons.regularIcons && icons.lightIcons && this.selectedOption === '1') {
-                    icons.solidIcons.forEach((icon) => displayIcons.push(icon));
-                    icons.regularIcons.forEach((icon) => displayIcons.push(icon));
-                    icons.lightIcons.forEach((icon) => displayIcons.push(icon));
-                    icons.duotoneIcons.forEach((icon) => displayIcons.push(icon));
-                    icons.brandsIcons.forEach((icon) => displayIcons.push(icon));
-                }
-                return displayIcons;
+            return null;
+        },
+
+        filteredResults () {
+            if (this.results === null) {
+                return null;
             }
-            this.resetIndex();
-            if (icons.solidIcons && this.selectedOption === 'fas') {
-                icons.solidIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
+
+            if (this.selectedStyle === '') {
+                return this.results;
             }
-            if (icons.regularIcons && this.selectedOption === 'far') {
-                icons.regularIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
+
+            return this.results.filter((result) => {
+                return result.style === this.selectedStyle;
+            });
+        },
+
+        icons () {
+            if (this.filteredResults === null) {
+                return null;
             }
-            if (icons.lightIcons && this.selectedOption === 'fal') {
-                icons.lightIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-            }
-            if (icons.duotoneIcons && this.selectedOption === 'fad') {
-                icons.duotoneIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-            }
-            if (icons.brandsIcons && this.selectedOption === 'fab') {
-                icons.brandsIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-            }
-            // Display all icons
-            if (icons.brandsIcons && icons.solidIcons && icons.duotoneIcons && icons.regularIcons && icons.lightIcons && this.selectedOption === '1') {
-                icons.solidIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-                icons.regularIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-                icons.lightIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-                icons.duotoneIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-                icons.brandsIcons.forEach(icon => {
-                    const fullIcon = icon.prefix + ' ' + icon.class;
-                    if (fullIcon.includes(this.search.toLowerCase())) displayIcons.push(icon);
-                });
-            }
-            return displayIcons;
+
+            // Paginate results
+            return this.filteredResults.slice(this.iconsPerPage * this.selectedPage - this.iconsPerPage, this.iconsPerPage * this.selectedPage);
         },
 
         pages () {
-            return Math.ceil(this.icons.length / this.iconsPerPage);
+            if (this.filteredResults === null) {
+                return 0;
+            }
+
+            return Math.ceil(this.filteredResults.length / this.iconsPerPage);
         },
     },
 
     created () {
-        if (window.localStorage.getItem('janes-wordpress-theme-recent-icons')) {
-            this.recentIcons = JSON.parse(window.localStorage.getItem('janes-wordpress-theme-recent-icons'));
+        if (window.localStorage.getItem('janes-wordpress-theme-recent-icons-v6')) {
+            this.recentIcons = JSON.parse(window.localStorage.getItem('janes-wordpress-theme-recent-icons-v6'));
         }
     },
 
@@ -313,39 +249,46 @@ export default {
         cancel () {
             this.close();
         },
+
         close () {
             this.$destroy();
             jQuery('#iconpicker').remove();
         },
+
         setIcon (icon) {
             this.selectedIcon = icon;
             this.cancelClear();
             this.srollToUseButton();
         },
+
         askForClear () {
             this.asksForClear = true;
         },
+
         cancelClear () {
             this.asksForClear = false;
         },
+
         confirmClear () {
             window.WordplateFontawesomePicker.inputElement.value = '';
             this.$nextTick(() => { jQuery(window.WordplateFontawesomePicker.inputElement).trigger('change'); });
             this.close();
         },
+
         useIcon () {
-            window.WordplateFontawesomePicker.inputElement.value = `${this.selectedIcon.prefix} ${this.selectedIcon.class}`;
+            window.WordplateFontawesomePicker.inputElement.value = this.selectedIcon.class;
             this.$nextTick(() => { jQuery(window.WordplateFontawesomePicker.inputElement).trigger('change'); });
             const tempRecent = this.recentIcons.filter((icon) =>
                 JSON.stringify(icon) !== JSON.stringify(this.selectedIcon)
             );
             tempRecent.unshift(this.selectedIcon);
             this.recentIcons = tempRecent;
-            window.localStorage.setItem('janes-wordpress-theme-recent-icons', JSON.stringify(tempRecent));
+            window.localStorage.setItem('janes-wordpress-theme-recent-icons-v6', JSON.stringify(tempRecent));
             this.selectedIcon = null;
 
             this.close();
         },
+
         srollToUseButton() {
             this.$nextTick(() => {
                 const el = document.getElementById('sjwfpUseIconButton');
@@ -358,59 +301,25 @@ export default {
                 }
             });
         },
-        fetchLightIcons () {
-            if (this.selectedOption === '1' || this.selectedOption === 'fal') {
-                fetch('/light.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        icons.lightIcons = data;
-                        this.allIcons = true;
-                    });
-            } else icons.lightIcons = null;
-        },
 
-        fetchRegularIcons () {
-            if (this.selectedOption === '1' || this.selectedOption === 'far') {
-                fetch('/regular.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        icons.regularIcons = data;
-                        this.allIcons = true;
-                    });
-            } else icons.regularIcons = null;
-        },
+        searchForIcon() {
+            if (!this.search) {
+                this.resetSearch();
+                return;
+            }
 
-        fetchSolidIcons () {
-            if (this.selectedOption === '1' || this.selectedOption === 'fas') {
-                fetch('/solid.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        icons.solidIcons = data;
-                        this.allIcons = true;
-                    });
-            } else icons.solidIcons = null;
-        },
-
-        fetchDuotoneIcons () {
-            if (this.selectedOption === '1' || this.selectedOption === 'fad') {
-                fetch('/duotone.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        icons.duotoneIcons = data;
-                        this.allIcons = true;
-                    });
-            } else icons.duotoneIcons = null;
-        },
-
-        fetchBrandIcons () {
-            if (this.selectedOption === '1' || this.selectedOption === 'fab') {
-                fetch('/brands.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        icons.brandsIcons = data;
-                        this.allIcons = true;
-                    });
-            } else icons.brandsIcons = null;
+            $.ajax({
+                type: 'POST',
+                url: window.WordplateFontawesomePickerLocalized.ajax_uri,
+                data: {
+                    action: 'sjwfp_search',
+                    search: this.search,
+                },
+                success: (response) => {
+                    this.results = response.results;
+                    this.resetIndex();
+                },
+            });
         },
 
         prevPage () {
@@ -429,18 +338,11 @@ export default {
             this.selectedPage = 1;
         },
 
-        resetSearch () {
+        reset () {
             this.search = null;
+            this.selectedPage = 1;
+            this.results = null;
         },
     },
 };
 </script>
-
-<style scoped>
-    @import 'https://pro.fontawesome.com/releases/v5.15.3/css/all.css';
-
-    a[href],
-    button {
-        cursor: pointer;
-    }
-</style>

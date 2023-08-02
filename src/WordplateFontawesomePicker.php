@@ -8,19 +8,23 @@ class WordplateFontawesomePicker
 
     public $name = 'wordplate-fontawesome-picker';
 
-    public function __construct()
+    public $path;
+
+    public function __construct($path)
     {
+        $this->path = $path;
         $this->registerHooks();
     }
 
-    public static function create()
+    public static function create($path)
     {
-        return new self();
+        return new self($path);
     }
 
     public function registerHooks()
     {
         add_action('admin_enqueue_scripts', [$this, 'enqueAssets']);
+        add_action('wp_ajax_sjwfp_search', [$this, 'search']);
     }
 
     public function enqueAssets()
@@ -35,6 +39,8 @@ class WordplateFontawesomePicker
         wp_enqueue_script('gutenberg-wordplate-fontawesome-picker', $script_uri, [], $this->version);
         wp_localize_script('gutenberg-wordplate-fontawesome-picker', 'WordplateFontawesomePickerLocalized', [
             'picker_script_uri' => $picker_script_uri,
+            'ajax_uri' => admin_url('admin-ajax.php'),
+            'availableStyles' => $this->getAvailableStyles(),
         ]);
     }
 
@@ -55,5 +61,64 @@ class WordplateFontawesomePicker
         }
 
         return $url;
+    }
+
+    public function search()
+    {
+        $search = empty($_POST['search']) ? '' : $_POST['search'];
+
+        wp_send_json([
+            'results' => $this->searchForIcons($search),
+        ]);
+
+        wp_die();
+    }
+
+    private function searchForIcons($searchTerm) {
+        $files = glob(rtrim($this->path, '/') . '/**/*' . $searchTerm . '*', GLOB_BRACE);
+
+        $icons = array_map(function ($file) {
+            $path = array_reverse(explode(DIRECTORY_SEPARATOR, $file));
+            $name = str_replace('.svg', '', $path[0]);
+            $style = $path[1];
+            $styleClass = $this->getStyleClass($style);
+            $nameClass = $this->getNameClass($name);
+
+            return [
+                'style' => $style,
+                'class' => "$styleClass $nameClass",
+                'svg' => file_get_contents($file),
+            ];
+        }, $files);
+
+        return $icons;
+    }
+
+    private function getNameClass($name)
+    {
+        return "fa-$name";
+    }
+
+    private function getStyleClass($style)
+    {
+        if ($style === 'brands') return 'fab';
+        if ($style === 'duotone') return 'fad';
+        if ($style === 'light') return 'fal';
+        if ($style === 'regular') return 'far';
+        if ($style === 'solid') return 'fas';
+        if ($style === 'thin') return 'fat';
+        if ($style === 'sharp-light') return 'fasl';
+        if ($style === 'sharp-regular') return 'fasr';
+        if ($style === 'sharp-solid') return 'fass';
+        return 'far';
+    }
+
+    private function getAvailableStyles()
+    {
+        $directories = glob(rtrim($this->path, '/') . '/*', GLOB_ONLYDIR);
+
+        return array_map(function ($dir) {
+            return end(explode(DIRECTORY_SEPARATOR, $dir));
+        }, $directories);
     }
 }

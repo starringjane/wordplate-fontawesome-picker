@@ -8,3 +8,14 @@
 .acf-field.fontawesomepicker input {
     cursor: pointer;
 }
+
+.sjwfp a[href],
+.sjwfp button {
+    cursor: pointer;
+}
+
+.sjwfp svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}

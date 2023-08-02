@@ -2,20 +2,26 @@
 
 # Wordplate Fontawesome Picker
 
-A package that allows you to pick icons from fontawesome with wordplate
+A package that allows you to pick icons from with wordplate
 
 ## Installation
+
+Download the icons from https://fontawesome.com and put them in your repository
+
+Then require the package
 
 ```sh
 composer require starring-jane/wordplate-fontawesome-picker
 ```
 
-Create a WordplateFontawesomePicker instance in `functions.php`
+Create a WordplateFontawesomePicker instance in `functions.php` and add the path to the icons you just downloaded
 
 ```php
 use StarringJane\WordplateFontawesomePicker\WordplateFontawesomePicker;
 
-WordplateFontawesomePicker::create();
+$path_to_icons = '...';
+
+WordplateFontawesomePicker::create($path_to_icons);
 ```
 
 ## Usage
