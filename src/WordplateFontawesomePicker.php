@@ -75,7 +75,7 @@ class WordplateFontawesomePicker
     }
 
     private function searchForIcons($searchTerm) {
-        $files = glob(rtrim($this->path, '/') . '/**/*' . $searchTerm . '*', GLOB_BRACE);
+        $files = $this->searchInFiles($searchTerm);
 
         $icons = array_map(function ($file) {
             $path = array_reverse(explode(DIRECTORY_SEPARATOR, $file));
@@ -92,6 +92,19 @@ class WordplateFontawesomePicker
         }, $files);
 
         return $icons;
+    }
+
+    private function searchInFiles($searchTerm) {
+        $searchTerms = explode(' ', $searchTerm);
+
+        $files = null;
+
+        foreach ($searchTerms as $searchTerm) {
+            $results = glob(rtrim($this->path, '/') . '/**/*' . $searchTerm . '*', GLOB_BRACE);
+            $files = is_array($files) ? array_values(array_intersect($files, $results)) : $results;
+        }
+
+        return $files;
     }
 
     private function getNameClass($name)
