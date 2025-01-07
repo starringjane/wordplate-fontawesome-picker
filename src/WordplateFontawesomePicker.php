@@ -131,7 +131,8 @@ class WordplateFontawesomePicker
         $directories = glob(rtrim($this->path, '/') . '/*', GLOB_ONLYDIR);
 
         return array_map(function ($dir) {
-            return end(explode(DIRECTORY_SEPARATOR, $dir));
+            $parts = explode(DIRECTORY_SEPARATOR, $dir);
+            return end($parts);
         }, $directories);
     }
 }
