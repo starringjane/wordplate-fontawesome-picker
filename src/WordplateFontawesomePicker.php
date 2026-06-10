@@ -4,7 +4,7 @@ namespace StarringJane\WordplateFontawesomePicker;
 
 class WordplateFontawesomePicker
 {
-    public $version = '1.0.0';
+    public $version = '4.0.0';
 
     public $name = 'wordplate-fontawesome-picker';
 

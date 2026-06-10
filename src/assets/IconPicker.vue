@@ -1,20 +1,19 @@
-/* eslint-disable vue/script-indent */
 <template>
     <div
-        class="sjwfp sjwfp-fixed sjwfp-z-10 sjwfp-inset-0 sjwfp-min-h-screen sjwfp-bg-gray-500 sjwfp-bg-opacity-75 sjwfp-transition-opacity sjwfp-box-border"
+        class="sjwfp fixed z-100001 inset-0 min-h-screen bg-gray-500/75 transition-opacity box-border"
         aria-labelledby="modal-title"
         role="dialog"
         aria-modal="true"
     >
-        <div class="sjwfp-block sjwfp-h-full sjwfp-py-12 sjwfp-px-4 sjwfp-text-center sjwfp-box-border sjwfp-overflow-y-scroll">
-            <div class="sjwfp-flex sjwfp-items-center sjwfp-justify-center sjwfp-min-h-full sjwfp-text-center sjwfp-box-border">
-                <div class="sjwfp-block sjwfp-align-bottom sjwfp-bg-white sjwfp-rounded-lg sjwfp-text-left sjwfp-overflow-hidden sjwfp-shadow-xl sjwfp-transform sjwfp-transition-all sm:sjwfp-my-8 sm:sjwfp-align-middle sm:sjwfp-max-w-screen-md sm:sjwfp-w-full">
-                    <div class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-5 sjwfp-pb-4 sm:sjwfp-p-6 sm:sjwfp-pb-4">
-                        <div class="sm:sjwfp-flex sm:sjwfp-items-start">
-                            <div class="sjwfp-mt-3 sjwfp-text-center sm:sjwfp-text-left sjwfp-w-full">
-                                <form class="sjwfp-relative sjwfp-flex sjwfp-items-center" @submit.prevent="searchForIcon">
+        <div class="block h-full py-12 px-4 text-center box-border overflow-y-scroll">
+            <div class="flex items-center justify-center min-h-full text-center box-border">
+                <div class="block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-screen-md sm:w-full">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mt-3 text-center sm:text-left w-full">
+                                <form class="relative flex items-center" @submit.prevent>
                                     <button
-                                        class="sjwfp-absolute sjwfp-text-lg sjwfp-left-2 !sjwfp-bg-transparent !sjwfp-border-none"
+                                        class="absolute text-lg left-2 !bg-transparent !border-none"
                                         type="submit"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M368 208A160 160 0 1 0 48 208a160 160 0 1 0 320 0zM337.1 371.1C301.7 399.2 256.8 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 48.8-16.8 93.7-44.9 129.1L505 471c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L337.1 371.1z"/></svg>
@@ -22,13 +21,13 @@
 
                                     <input
                                         v-model="search"
-                                        class="sjwfp-bg-gray-50 sjwfp-rounded sjwfp-p-3 sjwfp-pl-10 sjwfp-w-full sjwfp-border sjwfp-border-solid sjwfp-border-gray-400 focus-within:sjwfp-outline-none"
+                                        class="bg-gray-50 rounded p-3 pl-10 w-full border border-solid border-gray-400 focus-within:outline-none"
                                         placeholder="Search..."
                                     >
 
                                     <button
                                         v-if="search"
-                                        class="sjwfp-absolute sjwfp-text-lg sjwfp-right-2 !sjwfp-bg-transparent !sjwfp-border-none"
+                                        class="absolute text-lg right-2 !bg-transparent !border-none"
                                         @click="reset"
                                         type="button"
                                     >
@@ -36,14 +35,14 @@
                                     </button>
                                 </form>
 
-                                <div v-if="availableStyles" class="sjwfp-flex sjwfp-items-center sjwfp-my-3">
-                                    <p class="sjwfp-w-1/2">
+                                <div v-if="availableStyles" class="flex items-center my-3">
+                                    <p class="w-1/2">
                                         Select icon category:
                                     </p>
                                     <select
                                         id="grid-state"
                                         v-model="selectedStyle"
-                                        class="sjwfp-block sjwfp-appearance-none sjwfp-w-1/2 sjwfp-bg-grey-lighter sjwfp-border sjwfp-border-solid sjwfp-border-grey-lighter sjwfp-text-grey-darker sjwfp-py-3 sjwfp-px-4 sjwfp-pr-8 sjwfp-rounded sjwfp-leading-tight sjwfp-focus:outline-none sjwfp-focus:bg-white sjwfp-focus:border-grey"
+                                        class="block appearance-none w-1/2 bg-grey-lighter border border-solid border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-grey"
                                         @change="resetIndex()"
                                     >
                                         <option value="">
@@ -59,13 +58,13 @@
                                     </select>
                                 </div>
 
-                                <div v-if="icons && icons.length" class="sjwfp-grid sjwfp-grid-cols-6 md:sjwfp-grid-cols-8 xl:sjwfp-grid-cols-12 sjwfp-mt-2 sjwfp-text-center">
+                                <div v-if="icons && icons.length" class="grid grid-cols-6 md:grid-cols-8 xl:grid-cols-12 mt-2 text-center">
                                     <div
                                         v-for="icon in icons"
                                         :key="icon.class"
                                     >
                                         <button
-                                            class="sjwfp sjwfp-p-4 sjwfp-text-2xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            class="sjwfp p-4 text-2xl text-gray-700 rounded !bg-transparent !border-none hover:text-white hover:!bg-primary-500 transition-colors"
                                             v-html="icon.svg"
                                             @click="setIcon(icon)"
                                         />
@@ -74,28 +73,28 @@
 
                                 <p
                                     v-if="icons !== null && icons.length === 0"
-                                    class="sjwfp-text-red-400 sjwfp-mt-4 sjwfp-mb-8"
+                                    class="text-red-400 mt-4 mb-8"
                                 >
                                     No icons were found
                                 </p>
 
-                                <div v-if="pages" class="sjwfp-flex sjwfp-justify-center sjwfp-items-center sjwfp-mt-4">
+                                <div v-if="pages" class="flex justify-center items-center mt-4">
                                     <button
-                                        class="!sjwfp-bg-transparent !sjwfp-border-none"
-                                        :class="selectedPage > 1 ? 'sjwfp-visible' : 'sjwfp-invisible'"
+                                        class="!bg-transparent !border-none"
+                                        :class="selectedPage > 1 ? 'visible' : 'invisible'"
                                         @click="prevPage"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M20.7 267.3c-6.2-6.2-6.2-16.4 0-22.6l192-192c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6L54.6 256 235.3 436.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-192-192z"/></svg>
                                     </button>
 
-                                    <p class="sjwfp-px-4">
+                                    <p class="px-4">
                                         {{ selectedPage }} &nbsp; / &nbsp; {{ pages }}
                                     </p>
 
                                     <button
-                                        class="!sjwfp-bg-transparent !sjwfp-border-none"
+                                        class="!bg-transparent !border-none"
                                         @click="nextPage"
-                                        :class="selectedPage !== parseInt(pages) ? 'sjwfp-visible' : 'sjwfp-invisible'"
+                                        :class="selectedPage !== parseInt(pages) ? 'visible' : 'invisible'"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M299.3 244.7c6.2 6.2 6.2 16.4 0 22.6l-192 192c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6L265.4 256 84.7 75.3c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0l192 192z"/></svg>
                                     </button>
@@ -105,11 +104,11 @@
                                     v-if="recentIcons.length > 0"
                                 >
                                     <p>Recent icons:</p>
-                                    <div class="sjwfp-grid sjwfp-grid-cols-10 sjwfp-w-full sjwfp-mt-2 sjwfp-text-center">
+                                    <div class="grid grid-cols-10 w-full mt-2 text-center">
                                         <button
                                             v-for="icon in recentIcons.slice(0, 10)"
                                             :key="icon.class"
-                                            class="sjwfp-p-2 sjwfp-text-xl sjwfp-text-gray-700 sjwfp-rounded !sjwfp-bg-transparent !sjwfp-border-none hover:sjwfp-text-white hover:!sjwfp-bg-primary-500 sjwfp-transition-colors"
+                                            class="p-2 text-xl text-gray-700 rounded !bg-transparent !border-none hover:text-white hover:!bg-primary-500 transition-colors"
                                             @click="setIcon(icon)"
                                             v-html="icon.svg"
                                         />
@@ -119,16 +118,16 @@
                         </div>
                     </div>
 
-                    <div v-if="asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-pt-3 sm:sjwfp-px-6 sm:sjwfp-flex">
-                        <div class="sjwfp-text-sm sjwfp-font-bold">
+                    <div v-if="asksForClear" class="bg-white px-4 pt-3 sm:px-6 sm:flex">
+                        <div class="text-sm font-bold">
                             Are you sure you want to clear the field?
                         </div>
                     </div>
 
-                    <div v-if="asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-py-3 sm:sjwfp-px-6 sm:sjwfp-flex">
+                    <div v-if="asksForClear" class="bg-white px-4 py-3 sm:px-6 sm:flex">
                         <button
                             type="button"
-                            class="sjwfp-mt-3 sjwfp-mr-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-red-100 sjwfp-border sjwfp-border-solid sjwfp-border-red-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-red-700 hover:sjwfp-bg-red-200 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            class="mt-3 mr-3 items-center inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-red-100 border border-solid border-red-200 text-base font-medium text-red-700 hover:bg-red-200 sm:mt-0 sm:w-auto sm:text-sm"
                             @click="confirmClear"
                         >
                             Yes, clear the field
@@ -136,17 +135,17 @@
 
                         <button
                             type="button"
-                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-gray-50 sjwfp-border sjwfp-border-solid sjwfp-border-gray-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-gray-700 hover:sjwfp-bg-gray-100 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            class="mt-3 items-center inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-50 border border-solid border-gray-200 text-base font-medium text-gray-700 hover:bg-gray-100 sm:mt-0 sm:w-auto sm:text-sm"
                             @click="cancelClear"
                         >
                             No, keep the icon
                         </button>
                     </div>
 
-                    <div v-if="!asksForClear" class="sjwfp-bg-white sjwfp-px-4 sjwfp-py-3 sm:sjwfp-px-6 sm:sjwfp-flex">
+                    <div v-if="!asksForClear" class="bg-white px-4 py-3 sm:px-6 sm:flex">
                         <button
                             type="button"
-                            class="sjwfp-mt-3 sjwfp-mr-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-red-100 sjwfp-border sjwfp-border-solid sjwfp-border-red-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-red-700 hover:sjwfp-bg-red-200 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            class="mt-3 mr-3 items-center inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-red-100 border border-solid border-red-200 text-base font-medium text-red-700 hover:bg-red-200 sm:mt-0 sm:w-auto sm:text-sm"
                             @click="askForClear"
                         >
                             Clear
@@ -154,7 +153,7 @@
 
                         <button
                             type="button"
-                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-bg-gray-50 sjwfp-border sjwfp-border-solid sjwfp-border-gray-200 sjwfp-text-base sjwfp-font-medium sjwfp-text-gray-700 hover:sjwfp-bg-gray-100 sm:sjwfp-mt-0 sm:sjwfp-w-auto sm:sjwfp-text-sm"
+                            class="mt-3 items-center inline-flex justify-center rounded-md shadow-sm px-4 py-2 bg-gray-50 border border-solid border-gray-200 text-base font-medium text-gray-700 hover:bg-gray-100 sm:mt-0 sm:w-auto sm:text-sm"
                             @click="cancel"
                         >
                             Close
@@ -164,13 +163,13 @@
                             v-if="selectedIcon"
                             id="sjwfpUseIconButton"
                             type="button"
-                            class="sjwfp-mt-3 sjwfp-items-center sjwfp-w-full sjwfp-inline-flex sjwfp-justify-center sjwfp-rounded-md sjwfp-bg-primary-500 sjwfp-border sjwfp-border-solid sjwfp-border-primary-600 sjwfp-shadow-sm sjwfp-px-4 sjwfp-py-2 sjwfp-text-base sjwfp-font-medium sjwfp-text-white hover:sjwfp-bg-blue-500 sm:sjwfp-mt-0 sm:sjwfp-ml-3 sm:sjwfp-text-sm"
+                            class="mt-3 items-center w-full inline-flex justify-center rounded-md bg-primary-500 border border-solid border-primary-600 shadow-sm px-4 py-2 text-base font-medium text-white hover:bg-blue-500 sm:mt-0 sm:ml-3 sm:text-sm"
                             @click="useIcon"
                         >
                             <span>Use</span>
 
                             <span
-                                class="sjwfp-mx-3 sjwfp-text-lg"
+                                class="mx-3 text-lg"
                                 v-html="selectedIcon.svg"
                             />
 
@@ -197,6 +196,19 @@ export default {
         recentIcons: [],
         asksForClear: false,
     }),
+
+    watch: {
+        search (value) {
+            clearTimeout(this._searchTimeout);
+            if (!value) {
+                this.reset();
+                return;
+            }
+            this._searchTimeout = setTimeout(() => {
+                this.searchForIcon();
+            }, 300);
+        },
+    },
 
     computed: {
         availableStyles () {
@@ -251,8 +263,7 @@ export default {
         },
 
         close () {
-            this.$destroy();
-            jQuery('#iconpicker').remove();
+            window.WordplateFontawesomePicker.close();
         },
 
         setIcon (icon) {
@@ -270,14 +281,22 @@ export default {
         },
 
         confirmClear () {
-            window.WordplateFontawesomePicker.inputElement.value = '';
-            this.$nextTick(() => { jQuery(window.WordplateFontawesomePicker.inputElement).trigger('change'); });
+            const el = window.WordplateFontawesomePicker.inputElement;
+            el.value = '';
+            this.$nextTick(() => {
+                jQuery(el).trigger('change');
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+            });
             this.close();
         },
 
         useIcon () {
-            window.WordplateFontawesomePicker.inputElement.value = this.selectedIcon.class;
-            this.$nextTick(() => { jQuery(window.WordplateFontawesomePicker.inputElement).trigger('change'); });
+            const el = window.WordplateFontawesomePicker.inputElement;
+            el.value = this.selectedIcon.class;
+            this.$nextTick(() => {
+                jQuery(el).trigger('change');
+                el.dispatchEvent(new Event('change', { bubbles: true }));
+            });
             const tempRecent = this.recentIcons.filter((icon) =>
                 JSON.stringify(icon) !== JSON.stringify(this.selectedIcon)
             );
@@ -304,7 +323,7 @@ export default {
 
         searchForIcon() {
             if (!this.search) {
-                this.resetSearch();
+                this.reset();
                 return;
             }
 

@@ -1,25 +1,25 @@
-import Vue from 'vue';
-import IconPicker from './IconPicker';
+import './style.css';
+import { createApp } from 'vue';
+import IconPicker from './IconPicker.vue';
 
-var $ = window.jQuery;
+const $ = window.jQuery;
 
 window.WordplateFontawesomePicker = {
     inputElement: null,
+    _app: null,
 
-    open (inputElement) {
+    open(inputElement) {
         this.inputElement = inputElement;
-
-        $('body').append('<div id="iconpicker"><icon-picker></icon-picker></div>');
-
-        this.createVueApp(Vue, {
-            el: '#iconpicker',
-            components: {
-                IconPicker,
-            },
-        });
+        $('body').append('<div id="iconpicker"></div>');
+        this._app = createApp(IconPicker);
+        this._app.mount('#iconpicker');
     },
 
-    createVueApp (Vue, options) {
-        return new Vue(options);
+    close() {
+        if (this._app) {
+            this._app.unmount();
+            this._app = null;
+        }
+        $('#iconpicker').remove();
     },
 };

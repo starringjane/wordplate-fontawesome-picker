@@ -1,4 +1,4 @@
-var $ = window.jQuery;
+(function ($) {
 
 function init () {
     $('body').on('click', '.fontawesomepicker input', onClickOnPicker);
@@ -38,3 +38,5 @@ function loadScript(src, callback) {
 }
 
 $(document).ready(init);
+
+})(window.jQuery);
